@@ -1,0 +1,115 @@
+on_actions = {
+
+	on_startup = {
+		effect = {
+			every_country = {
+				set_variable = { original_capital_for_country = capital }
+			}
+		}
+	}
+
+	#used when puppeting in a peace conference
+	#ROOT = nation being puppeted, FROM = overlord
+
+	on_puppet = {
+		effect = {
+			if = {
+				limit = {
+					FROM = {
+						has_elections = no
+					}
+					ROOT = {
+						has_elections = yes
+					}
+				}
+				ROOT = {
+					set_politics = {
+						ruling_party = ROOT
+						elections_allowed = no
+					}
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						tag = MEX
+						has_idea = MEX_womens_suffrage
+					}
+					FROM = {
+						NOT = { has_government = democratic }
+					}
+				}
+				MEX = {
+					remove_ideas = MEX_womens_suffrage
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						tag = MEX
+						has_idea = MEX_ejido_worker_militias
+					}
+					FROM = {
+						NOT = { has_government = communism }
+					}
+				}
+				MEX = {
+					remove_ideas = MEX_ejido_worker_militias
+				}
+			}
+		}
+	}
+	
+	#used when puppeting through the occupied territories menu during peace time (or when releasing from non-core but owned territory, f.e. Britain releasing Egypt)
+	#ROOT = nation being released, FROM = overlord
+	
+	on_release_as_puppet = {
+		effect = {
+			if = {
+				limit = {
+					FROM = {
+						has_elections = no
+					}
+					ROOT = {
+						has_elections = yes
+						NOT = { has_government = democratic }
+					}
+				}
+				ROOT = {
+					set_politics = {
+						ruling_party = ROOT
+						elections_allowed = no
+					}
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						tag = MEX
+						has_idea = MEX_womens_suffrage
+					}
+					FROM = {
+						NOT = { has_government = democratic }
+					}
+				}
+				MEX = {
+					remove_ideas = MEX_womens_suffrage
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						tag = MEX
+						has_idea = MEX_ejido_worker_militias
+					}
+					FROM = {
+						NOT = { has_government = communism }
+					}
+				}
+				MEX = {
+					remove_ideas = MEX_ejido_worker_militias
+				}
+			}
+		}
+	}
+}
